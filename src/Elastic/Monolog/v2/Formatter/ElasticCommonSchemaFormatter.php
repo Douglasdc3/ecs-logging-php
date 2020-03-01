@@ -94,6 +94,18 @@ class ElasticCommonSchemaFormatter extends NormalizerFormatter
             unset($record['context']['user']);
         }
 
+        // Add Client Context
+        if (isset($record['context']['client']['Elastic\Types\Client']) === true) {
+            $message += $record['context']['client']['Elastic\Types\Client'];
+            unset($record['context']['client']);
+        }
+
+        // Add User Agent Context
+        if (isset($record['context']['user_agent']['Elastic\Types\UserAgent']) === true) {
+            $message += $record['context']['user_agent']['Elastic\Types\UserAgent'];
+            unset($record['context']['user_agent']);
+        }
+
         // Add ECS Labels
         if (empty($record['context']) === false) {
             $message['labels'] = [];
